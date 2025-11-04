@@ -28,9 +28,8 @@ local bones = {
 local ESP_SETTINGS = {
     Enabled = false,
     ShowBox = false,
-    BoxType = "2D",
     ShowName = false,
-    ShowHealthNumber = false, -- 👈 vida en texto al lado del nombre
+    ShowHealthNumber = false, -- 👈 la vida se mostrará aunque el nombre esté desactivado
     ShowDistance = false,
     ShowSkeletons = false,
     ShowTracer = false,
@@ -38,10 +37,16 @@ local ESP_SETTINGS = {
     BoxColor = Color3.new(237, 2, 18),
     BoxOutlineColor = Color3.new(237, 2, 18),
     TracerColor = Color3.new(237, 2, 18),
-    SkeletonsColor = Color3.new(1, 1, 1),
+    SkeletonsColor = Color3.new(237, 2, 18,
     TracerThickness = 2,
     TracerPosition = "Bottom"
 }
+
+--// Función para limpiar UID del nombre
+local function cleanName(name)
+    -- Elimina patrones tipo 8-4-4-4-12 (UUID)
+    return string.gsub(name, "%x%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x", "")
+end
 
 --// Función de creación de objetos Drawing
 local function create(class, props)
@@ -59,6 +64,7 @@ local function createEsp(npc)
         boxOutline = create("Square", {Thickness = 3, Filled = false, Color = ESP_SETTINGS.BoxOutlineColor}),
         name = create("Text", {Size = 13, Center = true, Outline = true, Color = Color3.new(1,1,1)}),
         distance = create("Text", {Size = 12, Center = true, Outline = true, Color = Color3.new(1,1,1)}),
+        health = create("Text", {Size = 13, Center = true, Outline = true, Color = Color3.new(1,1,1)}),
         tracer = create("Line", {Thickness = ESP_SETTINGS.TracerThickness, Color = ESP_SETTINGS.TracerColor}),
         skeleton = {}
     }
@@ -125,17 +131,27 @@ RunService.RenderStepped:Connect(function()
                         esp.boxOutline.Visible = false
                     end
 
-                    -- Nombre + Vida en texto
+                    -- Nombre sin UID
+                    local baseName = cleanName(npc.Name)
+
                     if ESP_SETTINGS.ShowName then
-                        local healthText = ""
-                        if ESP_SETTINGS.ShowHealthNumber then
-                            healthText = string.format(" [%d/%d]", math.floor(hum.Health), math.floor(hum.MaxHealth))
-                        end
                         esp.name.Visible = true
-                        esp.name.Text = npc.Name .. healthText
+                        esp.name.Text = baseName
                         esp.name.Position = Vector2.new(pos.X, y - 15)
                     else
                         esp.name.Visible = false
+                    end
+
+                    -- Vida (siempre visible)
+                    if ESP_SETTINGS.ShowHealthNumber and hum then
+                        local healthText = string.format("[%d/%d]", math.floor(hum.Health), math.floor(hum.MaxHealth))
+                        esp.health.Text = ESP_SETTINGS.ShowName and (" " .. healthText) or (baseName .. " " .. healthText)
+                        esp.health.Visible = true
+                        esp.health.Position = ESP_SETTINGS.ShowName
+                            and Vector2.new(pos.X + (#baseName * 4.5), y - 15) -- al lado del nombre
+                            or Vector2.new(pos.X, y - 15) -- si no hay nombre, usa posición del nombre
+                    else
+                        esp.health.Visible = false
                     end
 
                     -- Distancia
