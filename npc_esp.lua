@@ -37,7 +37,7 @@ local ESP_SETTINGS = {
     BoxColor = Color3.new(237, 2, 18),
     BoxOutlineColor = Color3.new(237, 2, 18),
     TracerColor = Color3.new(237, 2, 18),
-    SkeletonsColor = Color3.new(237, 2, 18,
+    SkeletonsColor = Color3.new(237, 2, 18),
     TracerThickness = 2,
     TracerPosition = "Bottom"
 }
