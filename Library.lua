@@ -797,9 +797,9 @@ do
 
         end
 
-    Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
+    Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'MainColor'; });
     Library:AddToRegistry(Highlight, { BackgroundColor3 = 'AccentColor'; });
-    Library:AddToRegistry(SatVibMapInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
+    Library:AddToRegistry(SatVibMapInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'MainColor'; });
 
         Library:AddToRegistry(HueBoxInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
         Library:AddToRegistry(RgbBoxBase.Frame, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
@@ -3001,7 +3001,7 @@ function Library:CreateWindow(...)
     });
 
     local MainSectionOuter = Library:Create('Frame', {
-        BackgroundColor3 = Library.BackgroundColor;
+        BackgroundColor3 = Library.MainColor;
         BorderColor3 = Library.MainColor;
         Position = UDim2.new(0, 8, 0, 25);
         Size = UDim2.new(1, -16, 1, -33);
