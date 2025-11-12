@@ -220,7 +220,7 @@ function Library:AddToolTip(InfoStr, HoverInstance)
 
     Library:AddToRegistry(Tooltip, {
         BackgroundColor3 = 'MainColor';
-        BorderColor3 = 'AccentColor';
+        BorderColor3 = 'OutlineColor';
     });
 
     Library:AddToRegistry(Label, {
@@ -572,7 +572,7 @@ do
 
         local HueBoxInner = Library:Create('Frame', {
             BackgroundColor3 = Library.MainColor;
-            BorderColor3 = Library.OutlineColor;
+            BorderColor3 = Library.MainColor;
             BorderMode = Enum.BorderMode.Inset;
             Size = UDim2.new(1, 0, 1, 0);
             ZIndex = 18,
