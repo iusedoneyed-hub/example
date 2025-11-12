@@ -731,7 +731,7 @@ do
             task.spawn(updateMenuSize)
 
             Library:AddToRegistry(ContextMenu.Inner, {
-                BackgroundColor3 = 'MainColor';
+                BackgroundColor3 = 'BackgroundColor';
                 BorderColor3 = 'MainColor';
             });
 
@@ -797,9 +797,9 @@ do
 
         end
 
-    Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'MainColor'; });
+    Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
     Library:AddToRegistry(Highlight, { BackgroundColor3 = 'AccentColor'; });
-    Library:AddToRegistry(SatVibMapInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'MainColor'; });
+    Library:AddToRegistry(SatVibMapInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
 
         Library:AddToRegistry(HueBoxInner, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
         Library:AddToRegistry(RgbBoxBase.Frame, { BackgroundColor3 = 'MainColor'; BorderColor3 = 'MainColor'; });
