@@ -1,1 +1,1 @@
-print("The script will be temporarily under maintenance because the Moonsec obfuscator is causing bugs in some lines of code.")
+loadstring(game:HttpGet("https://cdn.authguard.org/virtual-file/48e0401499e54aa391aa7dd6346e67be"))()
